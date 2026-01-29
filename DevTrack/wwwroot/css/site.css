@@ -1,0 +1,33 @@
+/* DevTrack - estilos base */
+
+:root {
+    --dt-primary: #0d6efd;
+    --dt-dark: #212529;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+footer {
+    margin-top: auto;
+}
+
+.navbar-brand {
+    font-weight: 600;
+}
+
+.card {
+    border: none;
+    border-radius: 0.5rem;
+}
+
+.card-title {
+    font-weight: 600;
+}

@@ -1,0 +1,27 @@
+# Build
+[Dd]ebug/
+[Rr]elease/
+[Bb]in/
+[Oo]bj/
+[Aa]rtifacts/
+
+# IDE
+.vs/
+.vscode/
+*.user
+*.suo
+
+# .NET
+*.log
+*.db
+*.db-shm
+*.db-wal
+project.lock.json
+project.fragment.lock.json
+
+# ASP.NET
+appsettings.*.local.json
+
+# macOS / Windows
+.DS_Store
+Thumbs.db
