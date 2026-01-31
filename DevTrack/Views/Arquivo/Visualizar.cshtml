@@ -1,0 +1,19 @@
+@{
+    ViewData["Title"] = "Visualizar arquivo";
+    var nome = ViewBag.NomeArquivo as string ?? "arquivo";
+    var conteudo = ViewBag.Conteudo as string ?? "";
+}
+
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-action="Index">Arquivos</a></li>
+                <li class="breadcrumb-item active" aria-current="page">@nome</li>
+            </ol>
+        </nav>
+        <h4>@nome</h4>
+        <pre class="bg-light border rounded p-3"><code>@conteudo</code></pre>
+        <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+    </div>
+</div>

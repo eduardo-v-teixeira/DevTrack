@@ -1,0 +1,75 @@
+@model DevTrack.Models.ViewModels.ProcessarArquivoInput
+@{
+    ViewData["Title"] = "Arquivos";
+    var arquivos = ViewBag.Arquivos as IEnumerable<string> ?? Enumerable.Empty<string>();
+}
+
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <h2 class="mb-4">Processar arquivo</h2>
+
+        @if (TempData["MensagemSucesso"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                @TempData["MensagemSucesso"]
+                @if (TempData["ArquivoCriado"] != null)
+                {
+                    <a href="@Url.Action("Visualizar", "Arquivo", new { nome = TempData["ArquivoCriado"] })" class="alert-link ms-2">Ver arquivo</a>
+                }
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+            </div>
+        }
+
+        @if (TempData["MensagemErro"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                @TempData["MensagemErro"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+            </div>
+        }
+
+        <form asp-action="Processar" method="post" class="card shadow-sm">
+            <div class="card-body">
+                <div class="mb-3">
+                    <label asp-for="NomeArquivo" class="form-label"></label>
+                    <input asp-for="NomeArquivo" class="form-control" placeholder="ex: minhas-notas.txt" autofocus />
+                    <span asp-validation-for="NomeArquivo" class="text-danger small"></span>
+                    <div class="form-text">Extensões permitidas: .txt, .md, .json, .log</div>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Conteudo" class="form-label"></label>
+                    <textarea asp-for="Conteudo" class="form-control" rows="5" placeholder="Digite o conteúdo do arquivo..."></textarea>
+                    <span asp-validation-for="Conteudo" class="text-danger small"></span>
+                    <div class="form-text">Máximo: 5000 caracteres</div>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    Gravar arquivo
+                </button>
+            </div>
+        </form>
+
+        <section class="mt-5">
+            <h5 class="mb-3">Arquivos existentes</h5>
+            @if (arquivos.Any())
+            {
+                <ul class="list-group list-group-flush">
+                    @foreach (var arq in arquivos)
+                    {
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>@arq</span>
+                            <a asp-action="Visualizar" asp-route-nome="@arq" class="btn btn-sm btn-outline-primary">Visualizar</a>
+                        </li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <p class="text-muted">Nenhum arquivo cadastrado ainda.</p>
+            }
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
